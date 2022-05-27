@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import styled from 'styled-components';
 
 const BigCard = styled.div`
@@ -39,3 +40,20 @@ function CardGrande(props) {
 }
 
 export default CardGrande;
+=======
+import './CardGrande.css'
+
+function CardGrande(props) {
+    return (
+        <div className="bigcard-container">
+            <img src={ props.imagem } />
+            <div>
+                <h4>{ props.nome }</h4>
+                <p>{ props.descricao }</p>
+            </div>
+        </div>
+    )
+}
+
+export default CardGrande;
+>>>>>>> 9afb064e9dc2cc22a4f920fb0fe1338e92ad9269

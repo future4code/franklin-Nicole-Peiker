@@ -8,8 +8,12 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+<<<<<<< HEAD
     "react-scripts": "3.4.1",
     "styled-components": "^5.3.5"
+=======
+    "react-scripts": "3.4.1"
+>>>>>>> 9afb064e9dc2cc22a4f920fb0fe1338e92ad9269
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,9 +35,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   },
   "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
   "main": "index.js",
   "author": "",
   "license": "ISC"
+=======
+  }
+>>>>>>> 9afb064e9dc2cc22a4f920fb0fe1338e92ad9269
 }
