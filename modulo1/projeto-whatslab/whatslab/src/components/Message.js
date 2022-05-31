@@ -1,12 +1,12 @@
 import React from 'react';
-import styles from './Message.css';
+import './Message.css';
 
 function Message(props) {
   return (
-    <div>
+    <li className="messageBox">
       <h4>{props.nome}</h4>
       <p>{props.conteudo}</p>
-    </div>
+    </li>
   );
 }
 
