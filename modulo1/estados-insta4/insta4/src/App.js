@@ -16,7 +16,7 @@ function App() {
       fotoPost: 'https://picsum.photos/200/150'
     },
     {
-      nomeUsuario: 'Ana',
+      nomeUsuario: 'Analu',
       fotoUsuario: 'https://picsum.photos/50/49',
       fotoPost: 'https://picsum.photos/200/149'
     },
