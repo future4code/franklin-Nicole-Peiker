@@ -1,7 +1,6 @@
 import './App.css';
 import { Message } from './components/Message';
-import { DoubleInput } from './components/DoubleInput';
-import './script';
+import { SendMessage } from './components/SendMessage';
 
 function App() {
   return (
@@ -14,7 +13,7 @@ function App() {
         />
       </ul>
       <form className="sendMessage">
-        <DoubleInput texto1="Contato" texto2="Escreva aqui sua mensagem..." />
+        <SendMessage texto1="Contato" texto2="Escreva aqui sua mensagem..." />
       </form>
     </div>
   );
