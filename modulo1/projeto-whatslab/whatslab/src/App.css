@@ -4,3 +4,25 @@
   bottom: 0;
   width: 100%;
 }
+
+.inputBox {
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  font-family: serif;
+}
+
+.firstInput {
+  width: 30%;
+  padding: 10px;
+  border: 1px solid #ebebeb;
+  font-size: 16px;
+}
+
+.secondInput {
+  width: 60%; 
+  padding: 10px 44px 10px 10px;
+  border: 1px solid #ebebeb;
+  font-size: 16px;
+}
