@@ -44,7 +44,7 @@ function App() {
   return (
     <MainContainer className="App">
       {renderEtapa()}
-      {etapa > 3 ? <div /> : <Btn onClick="proximaEtapa">Próxima etapa</Btn>}
+      {etapa > 3 ? <div /> : <Btn onClick={proximaEtapa}>Próxima etapa</Btn>}
     </MainContainer>
   );
 }
