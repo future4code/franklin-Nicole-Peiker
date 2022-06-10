@@ -22,22 +22,35 @@ function App() {
   const [tarefa, setTarefa] = useState([
     {
       id: Date.now(), // Explicação abaixo
-      texto: 'Texto da tarefa',
+      texto: 'Texto da segunda tarefa',
       completa: true // Indica se a tarefa está completa (true ou false)
     }
   ]);
   const [inputValue, setInputValue] = useState('');
   const [filtro, setFiltro] = useState('');
 
-  useEffect(() => {}, []);
+  useEffect(
+    e => {
+      if (e) return e.preventDefault();
+      if (inputValue) {
+        localStorage.setItem('Tarefas', JSON.stringify(tarefa));
+      }
+      console.log(JSON.stringify(tarefa));
+    },
+    [tarefa]
+  );
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const tarefasArmazenadas = localStorage.getItem('Tarefas');
+    setTarefa(JSON.parse(tarefasArmazenadas));
+  }, []);
 
   const onChangeInput = e => {
     setInputValue(e.target.value);
   };
 
-  const criaTarefa = () => {
+  const criaTarefa = e => {
+    e.preventDefault();
     const novaTarefa = {
       id: Date.now(),
       texto: inputValue,
@@ -47,18 +60,16 @@ function App() {
     setInputValue('');
   };
 
-  // const enviaTarefa = e => {
-  //   if (e.key !== 'Enter') return;
-  //   else criaTarefa();
-  // };
-
   const selectTarefa = id => {
-    // const atualizaTarefa = tarefa.map(tarefa => {
-    // if (tarefa.id !== id) {
-    //   return tarefa;
-    // } else {
-    //   tarefa.completa = !tarefa.completa;
-    // }
+    const atualizaTarefa = tarefa.map(tarefa => {
+      if (tarefa.id === id) {
+        const novaTarefa = { ...tarefa, completa: !tarefa.completa };
+        return novaTarefa;
+      } else {
+        return tarefa;
+      }
+    });
+    setTarefa(atualizaTarefa);
   };
 
   const onChangeFilter = e => {
