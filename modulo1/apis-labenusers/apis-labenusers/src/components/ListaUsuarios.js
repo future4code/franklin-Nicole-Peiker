@@ -23,31 +23,39 @@ function ListaUsuarios() {
   };
   useEffect(getAllUsers, []);
 
-  const searchUser = () => {};
-
-  const removeUser = () => {
-    axios
-      .delete(
-        'https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:id',
-        { headers: { Authorization: 'nicole-peiker-franklin' } }
-      )
-      .then()
-      .catch(error => console.log(error.message));
+  const removeUser = id => {
+    // axios
+    //   .delete(
+    //     `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:${id}`,
+    //     {
+    //       params: { id: id },
+    //       headers: { Authorization: 'nicole-peiker-franklin' }
+    //     }
+    //   )
+    //   .then(response => {
+    //     alert(`${id} deletado com sucesso`);
+    //     console.log(response);
+    //   })
+    //   .catch(error => console.log(error.message));
   };
 
   const showUserList = userList.map(user => {
     return (
       <div>
-        <li key={user.email}>{user.name}</li>
-        <button onClick={removeUser}>Excluir</button>
+        <li key={user.id}>
+          {user.name}
+          <button onClick={() => removeUser(user.id)}>Excluir</button>
+        </li>
       </div>
     );
   });
+
+  console.log(userList);
   return (
     <div>
       {showUserList}
       <input onChange={handleInputName} value={inputName} placeholder="Nome" />
-      <button onClick={searchUser}>Buscar</button>
+      <button onClick="">Buscar</button>
     </div>
   );
 }
