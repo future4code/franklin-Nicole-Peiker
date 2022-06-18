@@ -24,19 +24,19 @@ function ListaUsuarios() {
   useEffect(getAllUsers, []);
 
   const removeUser = id => {
-    // axios
-    //   .delete(
-    //     `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/:${id}`,
-    //     {
-    //       params: { id: id },
-    //       headers: { Authorization: 'nicole-peiker-franklin' }
-    //     }
-    //   )
-    //   .then(response => {
-    //     alert(`${id} deletado com sucesso`);
-    //     console.log(response);
-    //   })
-    //   .catch(error => console.log(error.message));
+    axios
+      .delete(
+        `https://us-central1-labenu-apis.cloudfunctions.net/labenusers/users/${id}`,
+        {
+          headers: { Authorization: 'nicole-peiker-franklin' }
+        }
+      )
+      .then(response => {
+        alert(`Usuário deletado com sucesso`);
+        getAllUsers();
+        console.log(response);
+      })
+      .catch(error => console.log(error));
   };
 
   const showUserList = userList.map(user => {
