@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Btn } from './Btn';
 
 const AdminHome = () => {
   const [list, setList] = useState(['Inverno em Venus', 'Astro', 'Rolezinho']);
 
+  const deleteItem = id => {};
+
   return (
     <div>
-      <div>
-      <button onClick={}></button>
-      <button onClick={}></button>
-      <button onClick={}></button>
-      </div>
+      <h1>Proximas Viagens</h1>
       <div>
         {list.map(item => {
           return (
             <li>
               {item}
-              <button>
+              <button onClick={() => deleteItem(item.id)}>
                 x
-                <img src="" alt="" />
+                <img
+                  src="https://source.unsplash.com/collection/1112738/"
+                  alt=""
+                />
               </button>
             </li>
           );
