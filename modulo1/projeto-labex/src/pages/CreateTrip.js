@@ -48,6 +48,7 @@ const CreateTrip = () => {
   const handleInputDescription = e => {
     setInputDescription(e.target.value);
   };
+
   return (
     <LoginContainer>
       <h1>Cadastrar viagem</h1>
@@ -56,27 +57,33 @@ const CreateTrip = () => {
           onChange={handleInputName}
           value={inputName}
           placeholder="Nome"
+          type="text"
         />
         <Input
           onChange={handleInputPlanet}
           value={inputPlanet}
           placeholder="Planeta"
+          type="text"
         />
         <Input
           onChange={handleInputDate}
           value={inputDate}
           placeholder="Data de saída"
+          type="date"
         />
         <Input
           onChange={handleInputDuration}
           value={inputDuration}
           placeholder="Duração"
+          type="text"
         />
         <Input
           onChange={handleInputDescription}
           value={inputDescription}
           placeholder="Descrição"
+          type="text"
         />
+
         <BtnLarge name="Cadastrar" />
       </FormContainer>
     </LoginContainer>
