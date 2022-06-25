@@ -15,6 +15,7 @@ const BtnStyle = styled.button`
   width: 49%;
   height: 5vh;
   padding: 0 20px;
+  font-family: 'Share Tech Mono', monospace;
   &:hover {
     background-color: rgba(100, 100, 100, 0.8);
   }

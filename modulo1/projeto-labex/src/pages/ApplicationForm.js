@@ -8,6 +8,7 @@ const LoginContainer = styled.form`
   align-items: center;
   justify-content: center;
   color: #fff;
+  gap: 3vh;
 `;
 
 const FormContainer = styled.form`
@@ -16,7 +17,8 @@ const FormContainer = styled.form`
   align-items: center;
   justify-content: center;
   width: 25vw;
-  gap: 3vh;
+  gap: 2vh;
+  width: 100%;
 `;
 
 const Input = styled.input`
@@ -24,6 +26,7 @@ const Input = styled.input`
   height: 5vh;
   box-sizing: border-box;
   padding: 0 1vw;
+  background: rgba(255, 255, 255, 0.8);
 `;
 
 const ApplicationForm = () => {

@@ -16,6 +16,7 @@ const Input = styled.input`
   height: 5vh;
   box-sizing: border-box;
   padding: 0 1vw;
+  background: rgba(255, 255, 255, 0.8);
 `;
 
 const Login = () => {
