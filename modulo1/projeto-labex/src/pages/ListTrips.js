@@ -1,5 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import {
+  goToLastPage,
+  goToApplicationForm,
+  goToTripDetails
+} from '../routes/coordinator';
+import { Btn } from '../components/Btn';
+import { BASE_URL } from '../constants/urls';
 
 const List = styled.div`
   display: flex;
@@ -22,37 +31,29 @@ const Item = styled.li`
   padding: 1rem 3rem;
 `;
 
+const BtnContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
+`;
+
 const SubTitle = styled.h4`
   margin-bottom: 1rem;
 `;
 
 const ListTrips = () => {
-  const [list, setList] = useState([
-    {
-      id: 'AQvqKiajU6dXEaGsaJCC',
-      name: 'Ano novo em Mercúrio',
-      planet: 'Mercúrio',
-      description: 'Venha passar a virada pertinho do Sol!',
-      durationInDays: 7,
-      date: '31/12/2019'
-    },
-    {
-      id: 'CxcHhGKHVOtNKRrV7PWj',
-      description: 'Nenhum surfista intergalático pode ficar fora dessa!',
-      name: 'Surfando em Netuno',
-      date: '21/12/20',
-      planet: 'Netuno',
-      durationInDays: 540
-    },
-    {
-      id: 'Ff8iNgDWJfxwOTLhnkZG',
-      description: 'Uma viagem bem legal, na melhor época de marte',
-      planet: 'Marte',
-      durationInDays: 228,
-      name: 'Festança Marciana',
-      date: '21/12/21'
-    }
-  ]);
+  const [list, setList] = useState([]);
+  const navigate = useNavigate();
+
+  const getTrips = () => {
+    axios
+      .get(`${BASE_URL}/trips`)
+      .then(res => setList(res.data.trips))
+      .catch(error => console.log(error));
+  };
+  useEffect(getTrips, []);
   return (
     <div>
       <h1> Proximas Viagens</h1>
@@ -60,7 +61,10 @@ const ListTrips = () => {
         <List>
           {list.map(item => {
             return (
-              <Item>
+              <Item
+                key={item.id}
+                onClick={() => goToTripDetails(navigate, item.id)}
+              >
                 <h2>{item.name}</h2>
                 <SubTitle>{item.description}</SubTitle>
                 <p>Planeta: {item.planet}</p>
@@ -70,6 +74,10 @@ const ListTrips = () => {
             );
           })}
         </List>
+        <BtnContainer>
+          <Btn name="Inscreva-se" click={() => goToApplicationForm(navigate)} />
+          <Btn name="Voltar" click={() => goToLastPage(navigate)} />
+        </BtnContainer>
       </div>
     </div>
   );

@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logoLabeX.svg';
 import { Btn } from '../components/Btn';
+import { useNavigate } from 'react-router-dom';
+import { goToTripsList, goToAdminHome } from '../routes/coordinator';
 
 const HomeContainer = styled.div`
   width: 100vw;
@@ -27,14 +29,15 @@ const AdminBox = styled.div`
 `;
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <HomeContainer>
       <AdminBox>
-        <Btn name="Admin" />
+        <Btn name="Admin" click={() => goToAdminHome(navigate)} />
       </AdminBox>
       <HomeMain>
         <Logo src={logo} alt="Logo LabeX" />
-        <Btn name="Proximas viagens" />
+        <Btn name="Proximas viagens" click={() => goToTripsList(navigate)} />
       </HomeMain>
     </HomeContainer>
   );
