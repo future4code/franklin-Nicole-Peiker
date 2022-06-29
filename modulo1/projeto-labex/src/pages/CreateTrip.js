@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BtnLarge } from '../components/BtnLarge';
+import { Btn } from '../components/Btn';
 import axios from 'axios';
 import { BASE_URL } from '../constants/urls';
 import { useNavigate } from 'react-router-dom';
 import { goToLastPage } from '../routes/coordinator';
+import { useProtectedPage } from '../hooks/useProtectedPage';
 
-const LoginContainer = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #fff;
+  width: 40vw;
+  height: 100vh;
 `;
 
 const FormContainer = styled.form`
@@ -34,6 +38,7 @@ const Input = styled.input`
 `;
 
 const CreateTrip = () => {
+  useProtectedPage();
   const [inputName, setInputName] = useState('');
   const [inputPlanet, setInputPlanet] = useState('');
   const [inputDate, setInputDate] = useState('');
@@ -83,7 +88,7 @@ const CreateTrip = () => {
   };
 
   return (
-    <LoginContainer>
+    <Container>
       <h1>Cadastrar viagem</h1>
       <FormContainer>
         <Input
@@ -120,7 +125,7 @@ const CreateTrip = () => {
         <BtnLarge name="Cadastrar" click={createTrip} />
         <BtnLarge name="Voltar" click={() => goToLastPage(navigate)} />
       </FormContainer>
-    </LoginContainer>
+    </Container>
   );
 };
 

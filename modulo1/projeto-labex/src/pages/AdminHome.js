@@ -2,9 +2,12 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BtnLarge } from '../components/BtnLarge';
+import { Btn } from '../components/Btn';
 import { BASE_URL } from '../constants/urls';
 import { useNavigate } from 'react-router-dom';
 import { goToCreateTrip } from '../routes/coordinator';
+import { useProtectedPage } from '../hooks/useProtectedPage';
+import { Header } from '../components/Header';
 
 const Container = styled.div`
   display: flex;
@@ -13,6 +16,8 @@ const Container = styled.div`
   justify-content: center;
   gap: 5vh;
   color: #fff;
+  height: 100vh;
+  width: 100vw;
 `;
 
 const List = styled.div`
@@ -21,6 +26,8 @@ const List = styled.div`
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  width: 40vw;
+  height: 100vh;
 `;
 
 const Item = styled.li`
@@ -51,6 +58,7 @@ const TrashBtn = styled.button`
 `;
 
 const AdminHome = () => {
+  useProtectedPage();
   const [list, setList] = useState([]);
   const navigate = useNavigate();
   const getTrips = () => {
@@ -78,8 +86,8 @@ const AdminHome = () => {
 
   return (
     <Container>
-      <h1> Proximas Viagens</h1>
       <List>
+        <h1> Proximas Viagens</h1>
         {list.map(item => {
           return (
             <Item key={item.id} onClick={''}>
@@ -90,11 +98,11 @@ const AdminHome = () => {
             </Item>
           );
         })}
+        <BtnLarge
+          name="Cadastrar viagem"
+          click={() => goToCreateTrip(navigate)}
+        />
       </List>
-      <BtnLarge
-        name="Cadastrar viagem"
-        click={() => goToCreateTrip(navigate)}
-      />
     </Container>
   );
 };

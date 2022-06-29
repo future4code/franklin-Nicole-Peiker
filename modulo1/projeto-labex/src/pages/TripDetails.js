@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Btn } from '../components/Btn';
+import axios from 'axios';
+import { BASE_URL } from '../constants/urls';
+import { useProtectedPage } from '../hooks/useProtectedPage';
 
 const Container = styled.div`
   display: flex;
@@ -10,6 +13,7 @@ const Container = styled.div`
   width: 60vw;
   gap: 1rem;
   box-sizing: border-box;
+  height: 100vh;
 `;
 
 const ContainerDetails = styled.div`
@@ -78,30 +82,22 @@ const BtnContainer = styled.div`
   gap: 0.4rem;
 `;
 
-const TripDetails = () => {
-  const [list, setList] = useState([
-    {
-      name: 'Teste',
-      age: 20,
-      applicationText: 'Quero muuuuuuito ir!!!',
-      profession: 'Chefe',
-      country: 'Brasil'
-    },
-    {
-      name: 'Teste',
-      age: 20,
-      applicationText: 'Quero muuuuuuito ir!!!',
-      profession: 'Chefe',
-      country: 'Brasil'
-    },
-    {
-      name: 'Teste',
-      age: 20,
-      applicationText: 'Quero muuuuuuito ir!!!',
-      profession: 'Chefe',
-      country: 'Brasil'
-    }
-  ]);
+const TripDetails = id => {
+  useProtectedPage();
+  const [trip, setTrip] = useState('');
+  const [listApplication, setListApplication] = useState([]);
+  const token = localStorage.getItem('token');
+  const getTripDetails = () => {
+    axios
+      .get(`${BASE_URL}/trip/${id}`, {
+        headers: {
+          auth: token
+        }
+      })
+      .then(res => console.log(res.data))
+      .catch(error => console.log(error));
+  };
+
   return (
     <Container>
       <ContainerDetails>
@@ -115,7 +111,7 @@ const TripDetails = () => {
         </Details>
       </ContainerDetails>
       <List>
-        {list.map(item => {
+        {listApplication.map(item => {
           return (
             <Item onClick={''}>
               <ItemContainer>

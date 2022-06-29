@@ -10,6 +10,9 @@ import {
 import { Btn } from '../components/Btn';
 import { BASE_URL } from '../constants/urls';
 
+const BoxContainer = styled.div`
+  width: 50vw;
+`;
 const List = styled.div`
   display: flex;
   flex-direction: column;
@@ -22,9 +25,8 @@ const List = styled.div`
 
 const Item = styled.li`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
@@ -55,31 +57,33 @@ const ListTrips = () => {
   };
   useEffect(getTrips, []);
   return (
-    <div>
+    <BoxContainer>
       <h1> Proximas Viagens</h1>
       <div>
         <List>
           {list.map(item => {
             return (
-              <Item
-                key={item.id}
-                onClick={() => goToTripDetails(navigate, item.id)}
-              >
-                <h2>{item.name}</h2>
-                <SubTitle>{item.description}</SubTitle>
-                <p>Planeta: {item.planet}</p>
-                <p>Duração: {item.durationInDays}</p>
-                <p>Data: {item.date}</p>
+              <Item key={item.id}>
+                <div>
+                  <h2>{item.name}</h2>
+                  <SubTitle>{item.description}</SubTitle>
+                  <p>Planeta: {item.planet}</p>
+                  <p>Duração: {item.durationInDays}</p>
+                  <p>Data: {item.date}</p>
+                </div>
+                <Btn
+                  name="Inscreva-se"
+                  click={() => goToApplicationForm(navigate, item.id)}
+                />
               </Item>
             );
           })}
         </List>
         <BtnContainer>
-          <Btn name="Inscreva-se" click={() => goToApplicationForm(navigate)} />
           <Btn name="Voltar" click={() => goToLastPage(navigate)} />
         </BtnContainer>
       </div>
-    </div>
+    </BoxContainer>
   );
 };
 

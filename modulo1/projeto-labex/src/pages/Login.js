@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BtnLarge } from '../components/BtnLarge';
-import { useForm } from '../components/useForm';
-//import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL } from '../constants/urls';
+import { useForm } from '../hooks/useForm';
+import { useNavigate } from 'react-router-dom';
+import { goToAdminHome, goToLastPage } from '../routes/coordinator';
+import { login } from '../services/user';
+import { useUnprotectedPage } from '../hooks/useUnprotectedPage';
 
 const LoginContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 25vw;
+  width: 30vw;
+  min-width: 220px;
   gap: 3vh;
+  height: 100vh; ;
 `;
 
 const Input = styled.input`
@@ -25,22 +28,14 @@ const Input = styled.input`
 `;
 
 const Login = () => {
+  useUnprotectedPage();
   const [form, handleInputChange, clear] = useForm({ email: '', password: '' });
-  //const navigate = useNavigate();
-  //const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate();
 
   const onSubmitForm = event => {
-    console.log(form);
     event.preventDefault();
-    login();
-    // login(form, clear, navigate, setRightButtonText, setIsLoading);
-  };
-
-  const login = () => {
-    axios
-      .post(`${BASE_URL}/login`, form)
-      .then(res => console.log(res))
-      .catch(error => console.log(error));
+    login(form, clear, navigate);
+    goToAdminHome(navigate);
   };
 
   return (
@@ -48,17 +43,21 @@ const Login = () => {
       <Input
         onChange={handleInputChange}
         value={form.email}
+        name="email"
         placeholder="email"
         type="email"
+        required
       />
       <Input
         onChange={handleInputChange}
+        name="password"
         value={form.password}
         placeholder="senha"
         type="password"
+        required
       />
       <BtnLarge name="Login" type={'submit'} />
-      <BtnLarge name="Voltar" />
+      <BtnLarge name="Voltar" onClick={() => goToLastPage(navigate)} />
     </LoginContainer>
   );
 };

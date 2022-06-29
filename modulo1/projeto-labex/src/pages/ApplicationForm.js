@@ -1,14 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { BtnLarge } from '../components/BtnLarge';
+import { useNavigate } from 'react-router-dom';
+import { goToLastPage } from '../routes/coordinator';
+import { useForm } from '../hooks/useForm';
+import axios from 'axios';
+import { BASE_URL } from '../constants/urls';
 
-const LoginContainer = styled.form`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #fff;
   gap: 3vh;
+  height: 100vh;
 `;
 
 const FormContainer = styled.form`
@@ -27,70 +33,81 @@ const Input = styled.input`
   box-sizing: border-box;
   padding: 0 1vw;
   background: rgba(255, 255, 255, 0.8);
+  color: #000;
 `;
 
-const ApplicationForm = () => {
-  const [inputName, setInputName] = useState('');
-  const [inputAge, setInputAge] = useState('');
-  const [inputProfession, setInputProfession] = useState('');
-  const [inputCountry, setInputCountry] = useState('');
-  const [inputMotivation, setInputMotivation] = useState('');
+const ApplicationForm = id => {
+  const [form, handleInputChange, clear] = useForm({
+    name: '',
+    age: '',
+    applicationText: '',
+    profession: '',
+    country: ''
+  });
+  const navigate = useNavigate();
+  // const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputName = e => {
-    setInputName(e.target.value);
+  const onSubmitForm = event => {
+    console.log(form);
+    event.preventDefault();
+    applyToTrip();
   };
-  const handleInputAge = e => {
-    setInputAge(e.target.value);
-  };
-  const handleInputProfession = e => {
-    setInputProfession(e.target.value);
-  };
-  const handleInputCountry = e => {
-    setInputCountry(e.target.value);
-  };
-  const handleInputMotivation = e => {
-    setInputMotivation(e.target.value);
+
+  const applyToTrip = () => {
+    axios
+      .post(`${BASE_URL}/trips/${id}/apply`, form, {
+        headers: {
+          ContentType: 'application/json'
+        }
+      })
+      .then(res => console.log(res))
+      .catch(error => console.log(error));
   };
 
   return (
-    <LoginContainer>
+    <Container>
       <h1>Formulário de candidatura</h1>
-      <FormContainer>
+      <FormContainer onSubmit={onSubmitForm}>
         <Input
-          onChange={handleInputName}
-          value={inputName}
+          onChange={handleInputChange}
+          name="name"
+          value={form.name}
           placeholder="Nome"
           type="text"
         />
         <Input
-          onChange={handleInputAge}
-          value={inputAge}
-          placeholder="Planeta"
+          onChange={handleInputChange}
+          name="age"
+          value={form.age}
+          placeholder="Idade"
           type="text"
         />
         <Input
-          onChange={handleInputProfession}
-          value={inputProfession}
-          placeholder="Data de saída"
+          onChange={handleInputChange}
+          name="profession"
+          value={form.profession}
+          placeholder="Profissão"
           type="text"
         />
         <Input
-          onChange={handleInputCountry}
-          value={inputCountry}
-          placeholder="Duração"
+          onChange={handleInputChange}
+          name="applicationText"
+          value={form.applicationText}
+          placeholder="Texto de motivação"
           type="text"
         />
         <Input
-          onChange={handleInputMotivation}
-          value={inputMotivation}
-          placeholder="Descrição"
+          onChange={handleInputChange}
+          name="country"
+          value={form.country}
+          placeholder="Pais"
           type="text"
         />
 
-        <BtnLarge name="Login" />
-        <BtnLarge name="Voltar" />
+        <BtnLarge name="Enviar" type="submit" />
       </FormContainer>
-    </LoginContainer>
+      <BtnLarge name="Voltar" click={() => goToLastPage(navigate)} />
+    </Container>
   );
 };
 

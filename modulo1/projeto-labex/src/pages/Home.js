@@ -18,6 +18,7 @@ const HomeMain = styled.div`
 `;
 const Logo = styled.img`
   width: 30vw;
+  min-width: 200px;
   margin-bottom: 5vh;
 `;
 
