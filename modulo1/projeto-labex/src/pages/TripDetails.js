@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Btn } from '../components/Btn';
 import axios from 'axios';
 import { BASE_URL } from '../constants/urls';
 import { useProtectedPage } from '../hooks/useProtectedPage';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { goToLastPage } from '../routes/coordinator';
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: right;
   justify-content: center;
   width: 60vw;
   gap: 1rem;
-  box-sizing: border-box;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 `;
 
 const ContainerDetails = styled.div`
@@ -42,7 +45,7 @@ const Details = styled.div`
   color: #fff;
 `;
 
-const Subtitle = styled.h4`
+const Subtitle = styled.p`
   margin-bottom: 1rem;
 `;
 
@@ -56,7 +59,7 @@ const List = styled.div`
   width: 100%;
 `;
 
-const ItemContainer = styled.li`
+const ItemContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,38 +85,47 @@ const BtnContainer = styled.div`
   gap: 0.4rem;
 `;
 
-const TripDetails = id => {
+const TripDetails = () => {
   useProtectedPage();
-  const [trip, setTrip] = useState('');
-  const [listApplication, setListApplication] = useState([]);
-  const token = localStorage.getItem('token');
+  const [trip, setTrip] = useState({});
+  const [candidates, setCandidates] = useState([]);
+  const params = useParams();
+  const navigate = useNavigate();
+
+  console.log(params.id);
+
   const getTripDetails = () => {
+    const token = localStorage.getItem('token');
     axios
-      .get(`${BASE_URL}/trip/${id}`, {
+      .get(`${BASE_URL}/trip/${params.id}`, {
         headers: {
           auth: token
         }
       })
-      .then(res => console.log(res.data))
+      .then(res => {
+        setTrip(res.data.trip);
+        setCandidates(res.data.trip.candidates);
+      })
       .catch(error => console.log(error));
   };
+  useEffect(getTripDetails, []);
 
   return (
     <Container>
       <ContainerDetails>
         <Image src="https://source.unsplash.com/collection/1112738/" alt="" />
         <Details>
-          <h2>Teste</h2>
-          <Subtitle>Teste</Subtitle>
-          <p>Teste</p>
-          <p>Teste</p>
-          <p>Teste</p>
+          <h2>{trip.name}</h2>
+          <Subtitle>{trip.description}</Subtitle>
+          <p>Data de saída: {trip.date}</p>
+          <p>Duração da viagem: {trip.durationInDays}</p>
+          <p>Planeta: {trip.planet}</p>
         </Details>
       </ContainerDetails>
       <List>
-        {listApplication.map(item => {
+        {candidates.map(item => {
           return (
-            <Item onClick={''}>
+            <Item key={item.id}>
               <ItemContainer>
                 <p>Nome: {item.name}</p>
                 <p>Idade: {item.age}</p>
@@ -122,13 +134,14 @@ const TripDetails = id => {
                 <p>Pais: {item.country}</p>
               </ItemContainer>
               <BtnContainer>
-                <Btn name="aprovar"></Btn>
-                <Btn name="reprovar"></Btn>
+                <Btn name="aprovar" />
+                <Btn name="reprovar" />
               </BtnContainer>
             </Item>
           );
         })}
       </List>
+      <Btn name="Voltar" click={() => goToLastPage(navigate)} />
     </Container>
   );
 };

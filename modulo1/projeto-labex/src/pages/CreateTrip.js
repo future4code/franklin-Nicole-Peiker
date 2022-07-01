@@ -5,7 +5,7 @@ import { Btn } from '../components/Btn';
 import axios from 'axios';
 import { BASE_URL } from '../constants/urls';
 import { useNavigate } from 'react-router-dom';
-import { goToLastPage } from '../routes/coordinator';
+import { goToLastPage, goToAdminHome } from '../routes/coordinator';
 import { useProtectedPage } from '../hooks/useProtectedPage';
 
 const Container = styled.div`
@@ -45,7 +45,7 @@ const CreateTrip = () => {
   const [inputDuration, setInputDuration] = useState('');
   const [inputDescription, setInputDescription] = useState('');
   const navigate = useNavigate();
-
+  const token = localStorage.getItem('token');
   const handleInputName = e => {
     setInputName(e.target.value);
   };
@@ -77,12 +77,13 @@ const CreateTrip = () => {
         {
           headers: {
             ContentType: 'application/json',
-            auth: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Im93T2g5ZWo2bW50akZqNUNRMVB4IiwiZW1haWwiOiJhc3Ryb2RldkBnbWFpbC5jb20uYnIiLCJpYXQiOjE1ODk1NjI5MDh9.aB4dNbTCkToXB7pdzEa-tuMa-QbRQDUd93eva4-cec0'
+            auth: token
           }
         }
       )
       .then(res => {
-        console.log(res);
+        alert('Viagem cadastrada com sucesso.');
+        goToAdminHome(navigate);
       })
       .catch(error => console.log(error));
   };

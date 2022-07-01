@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import {
-  goToLastPage,
-  goToApplicationForm,
-  goToTripDetails
-} from '../routes/coordinator';
+import { goToLastPage, goToApplicationForm } from '../routes/coordinator';
 import { Btn } from '../components/Btn';
 import { BASE_URL } from '../constants/urls';
 
 const BoxContainer = styled.div`
   width: 50vw;
+  height: 100%;
+  min-height: 100vw;
 `;
 const List = styled.div`
   display: flex;
@@ -20,6 +18,7 @@ const List = styled.div`
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
+  min-width: 750px;
   margin-top: 3rem;
 `;
 

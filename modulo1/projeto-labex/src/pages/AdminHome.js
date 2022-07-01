@@ -5,7 +5,11 @@ import { BtnLarge } from '../components/BtnLarge';
 import { Btn } from '../components/Btn';
 import { BASE_URL } from '../constants/urls';
 import { useNavigate } from 'react-router-dom';
-import { goToCreateTrip } from '../routes/coordinator';
+import {
+  goToCreateTrip,
+  goToTripDetails,
+  goToLastPage
+} from '../routes/coordinator';
 import { useProtectedPage } from '../hooks/useProtectedPage';
 import { Header } from '../components/Header';
 
@@ -36,10 +40,20 @@ const Item = styled.li`
   align-items: center;
   width: 100%;
   height: 5vh;
-  padding: 0 0 0 1vw;
+
   background: rgba(255, 255, 255, 0.8);
   color: #000;
   border: 1px solid rgba(255, 255, 255);
+`;
+
+const Image = styled.img`
+  width: 1rem;
+`;
+
+const LittleBtn = styled.button`
+  padding: 0 1vw;
+  height: 5vh;
+  border: none;
   &:hover {
     background-color: rgba(255, 255, 255, 0.9);
     scale: 1.01;
@@ -47,14 +61,14 @@ const Item = styled.li`
   }
 `;
 
-const Image = styled.img`
-  width: 1rem;
+const DetailsBtn = styled.h2`
+  color: black;
+  font-size: 25px;
 `;
 
-const TrashBtn = styled.button`
-  padding: 0 1vw;
-  height: 5vh;
-  border: none;
+const ItemName = styled.h2`
+  color: black;
+  font-size: 25px;
 `;
 
 const AdminHome = () => {
@@ -68,13 +82,14 @@ const AdminHome = () => {
       .catch(error => console.log(error));
   };
   useEffect(getTrips, []);
+  const token = localStorage.getItem('token');
 
   const deleteItem = id => {
     axios
       .delete(`${BASE_URL}/trips/${id}`, {
         headers: {
           ContentType: 'application/json',
-          auth: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Ilp3N0tNUEp2RmFqRmtmUlE4N3RBIiwiZW1haWwiOiJhc3Ryb2RldkBnbWFpbC5jb20uYnIiLCJpYXQiOjE2MTc5MDE4NDd9.yKi2emMJ-Ln3fNigx09HNZIDWPEhF8e_WnbYAAd1r2k'
+          auth: token
         }
       })
       .then(res => {
@@ -90,11 +105,16 @@ const AdminHome = () => {
         <h1> Proximas Viagens</h1>
         {list.map(item => {
           return (
-            <Item key={item.id} onClick={''}>
-              {item.name}
-              <TrashBtn onClick={() => deleteItem(item.id)}>
+            <Item key={item.id}>
+              <div>
+                <LittleBtn onClick={() => goToTripDetails(navigate, item.id)}>
+                  <DetailsBtn>+</DetailsBtn>
+                </LittleBtn>
+                {item.name}
+              </div>
+              <LittleBtn onClick={() => deleteItem(item.id)}>
                 <Image src="https://cdn-icons-png.flaticon.com/512/1214/1214428.png" />
-              </TrashBtn>
+              </LittleBtn>
             </Item>
           );
         })}
@@ -102,6 +122,7 @@ const AdminHome = () => {
           name="Cadastrar viagem"
           click={() => goToCreateTrip(navigate)}
         />
+        <BtnLarge name="Voltar" click={() => goToLastPage(navigate)} />
       </List>
     </Container>
   );

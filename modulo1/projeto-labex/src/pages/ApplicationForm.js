@@ -6,6 +6,7 @@ import { goToLastPage } from '../routes/coordinator';
 import { useForm } from '../hooks/useForm';
 import axios from 'axios';
 import { BASE_URL } from '../constants/urls';
+import { useParams } from 'react-router-dom';
 
 const Container = styled.div`
   display: flex;
@@ -36,7 +37,7 @@ const Input = styled.input`
   color: #000;
 `;
 
-const ApplicationForm = id => {
+const ApplicationForm = () => {
   const [form, handleInputChange, clear] = useForm({
     name: '',
     age: '',
@@ -45,7 +46,7 @@ const ApplicationForm = id => {
     country: ''
   });
   const navigate = useNavigate();
-  // const [isLoading, setIsLoading] = useState(false);
+  const params = useParams();
 
   const onSubmitForm = event => {
     console.log(form);
@@ -55,7 +56,7 @@ const ApplicationForm = id => {
 
   const applyToTrip = () => {
     axios
-      .post(`${BASE_URL}/trips/${id}/apply`, form, {
+      .post(`${BASE_URL}/trips/${params.id}/apply`, form, {
         headers: {
           ContentType: 'application/json'
         }

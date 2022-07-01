@@ -17,8 +17,8 @@ export const goToCreateTrip = navigate => {
 export const goToTripDetails = (navigate, id) => {
   navigate(`/admin/trips/${id}`);
 };
-export const goToApplicationForm = navigate => {
-  navigate('/trips/application');
+export const goToApplicationForm = (navigate, id) => {
+  navigate(`/trips/application/${id}`);
 };
 export const goToAdminHome = navigate => {
   navigate('/admin/trips/list');
