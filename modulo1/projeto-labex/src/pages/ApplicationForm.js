@@ -61,7 +61,10 @@ const ApplicationForm = () => {
           ContentType: 'application/json'
         }
       })
-      .then(res => console.log(res))
+      .then(res => {
+        console.log(res);
+        clear();
+      })
       .catch(error => console.log(error));
   };
 

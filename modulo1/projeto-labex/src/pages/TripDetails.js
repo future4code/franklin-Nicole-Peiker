@@ -14,6 +14,7 @@ const Container = styled.div`
   align-items: right;
   justify-content: center;
   width: 60vw;
+  min-width: 700px;
   gap: 1rem;
   height: 100%;
   min-height: 100vh;

@@ -40,8 +40,7 @@ const Item = styled.li`
   align-items: center;
   width: 100%;
   height: 5vh;
-
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.4);
   color: #000;
   border: 1px solid rgba(255, 255, 255);
 `;
