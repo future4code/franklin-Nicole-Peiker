@@ -13,6 +13,6 @@ export const goToSignUp = navigate => {
 export const goToAddRecipes = navigate => {
   navigate('/adicionar-receita');
 };
-export const goToRecipesDetails = (navigate, id) => {
+export const goToRecipeDetail = (navigate, id) => {
   navigate(`/detalhe/${id}`);
 };

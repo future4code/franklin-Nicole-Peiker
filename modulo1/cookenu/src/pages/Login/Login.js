@@ -5,10 +5,10 @@ import Button from '@material-ui/core/Button';
 import { LoginForm } from './LoginForm';
 import { useNavigate } from 'react-router-dom';
 import { goToSignUp } from '../../routes/coodinator';
-//import useUnprotectedPage from '../../hooks/useUnprotectedPage';
+import { useUnprotectedPage } from '../../hooks/useUnprotectedPage';
 
 const Login = ({ setRightButtonText }) => {
-  //useUnprotectedPage();
+  useUnprotectedPage();
   const navigate = useNavigate();
   return (
     <ScreenContainer>

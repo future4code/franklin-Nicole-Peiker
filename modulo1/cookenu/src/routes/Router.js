@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AddRecipes } from '../pages/AddRecipes/AddRecipes';
-import { RecipeDetails } from '../pages/RecipeDetails/RecipeDetails';
+import { RecipeDetail } from '../pages/RecipeDetails/RecipeDetails';
 import { RecipesList } from '../pages/RecipesList/RecipesList';
 import { Login } from '../pages/Login/Login';
 import { SignUp } from '../pages/SignUp/SignUp';
@@ -17,7 +17,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<SignUp />} />
         <Route path="/adicionar-receita" element={<AddRecipes />} />
-        <Route path="/detalhe/:id" element={<RecipeDetails />} />
+        <Route path="/detalhe/:id" element={<RecipeDetail />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>

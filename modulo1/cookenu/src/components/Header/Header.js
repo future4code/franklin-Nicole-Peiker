@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import { StyledToolbar } from './styled';
 import Button from '@material-ui/core/Button';
-import { goToRecipesList, goToLogin } from '../../routes/coordinator';
+import { goToRecipesList, goToLogin } from '../../routes/coodinator';
 import { useNavigate } from 'react-router-dom';
 
 const Header = ({ rightButtonText, setRightButtonText }) => {
