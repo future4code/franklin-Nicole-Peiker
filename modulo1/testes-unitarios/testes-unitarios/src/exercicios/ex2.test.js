@@ -20,6 +20,11 @@ describe('Checa Palíndromo', () => {
     const ehPalindromo = checaPalindromo(
       'Socorram-me subi no onibus em marrocos'
     );
-    expect(ehPalindromo).toEqual(false);
+    expect(ehPalindromo).toEqual(true);
+  });
+
+  it("retorna false para 'Ana'", () => {
+    const ehPalindromo = checaPalindromo('Ana');
+    expect(ehPalindromo).toEqual(true);
   });
 });
