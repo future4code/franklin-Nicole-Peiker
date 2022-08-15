@@ -92,20 +92,67 @@ app.get('/contas',(req: Request, res: Response)=> {
   res.status(200).send(accounts)
 })
 
-// app.get('/:cpf/saldo',(req: Request, res: Response)=> {
-//   const cpf:string = req.params.cpf
-//   const indexLastOperation = (req.params.transactions).length - 1
-//   const currentBalance = req.params.transactions[indexLastOperation]
-//   res.status(200).send(`Seu saldo é ${currentBalance}`)
-// })
+app.get('/:cpf/saldo',(req: Request, res: Response)=> {
+  const cpf:string = req.params.cpf
+  const findAccount: Account []= accounts.filter(account => account.cpf === cpf)
+  const indexLastOperation = (findAccount[0].transactions).length - 1
+  const currentBalance = findAccount[0].transactions[indexLastOperation].balance
+  res.status(200).send(`Seu saldo é R$ ${currentBalance}`)
+})
 
-// app.get('/conta/deposito',(req: Request, res: Response) => {
-//   const amount = req.body
-//   res.status(200).send('Depósito efetuado com sucesso')
-// })
+app.post('/:cpf/deposito',(req: Request, res: Response) => {
+  const cpf:string = req.params.cpf
+  const today = req.body.dateTransaction
+  const addDeposit = Number(req.body.deposit)
+  const findAccount: Account []= accounts.filter(account => account.cpf === cpf)
+  const indexLastOperation = (findAccount[0].transactions).length - 1
+  const currentBalance = findAccount[0].transactions[indexLastOperation].balance
+  console.log()
+  const newTransaction: Transaction = {
+    balance:currentBalance + addDeposit,
+    transfer: 0,
+    deposit: addDeposit,
+    dateTransaction: today
+  }
+  findAccount[0].transactions.push(newTransaction)
 
-// app.put('/transferencia',(req: Request, res: Response) => {
-//   res.status(200).send('Depósito efetuado com sucesso')
-// })
+  res.status(200).send('Depósito efetuado com sucesso')
+})
+
+app.put('/:cpf/transferencia',(req: Request, res: Response) => {
+  const cpf:string = req.params.cpf
+  const transferTo: number = req.body.transfer
+  const sendToCpf: string = req.body.send
+  const today: string = req.body.dateTransaction
+  const findAccount: Account []= accounts.filter(account => account.cpf === cpf)
+  const indexLastOperation = (findAccount[0].transactions).length - 1
+  const currentBalance = findAccount[0].transactions[indexLastOperation].balance
+  if(currentBalance >= transferTo){
+    const findRecivierAccount: Account []= accounts.filter(account => account.cpf === sendToCpf)
+    const indexLastOperationRecivier = (findRecivierAccount[0].transactions).length - 1
+    const recivierBalance = findRecivierAccount[0].transactions[indexLastOperationRecivier].balance
+    const newTransactionRecived: Transaction = {
+    balance: recivierBalance + transferTo,
+    transfer: 0,
+    deposit: 0,
+    dateTransaction: today
+    }
+    findRecivierAccount[0].transactions.push(newTransactionRecived)
+
+    const transferTransaction: Transaction ={
+      balance: currentBalance - transferTo,
+      transfer: transferTo,
+      deposit: 0,
+      dateTransaction: today
+    }
+    findAccount[0].transactions.push(transferTransaction)
+    
+    res.status(200).send('Transferencia efetuada com sucesso')
+  } else {
+    res.send("Seu saldo é insuficiente para realizar esta transação.")
+  }
+
+  res.status(200).send('Transferencia efetuado com sucesso')
+})
 
 app.listen(3003, ( ) => {console.log ('Server is running in localhost:3003')}) 
