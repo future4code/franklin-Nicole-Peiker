@@ -103,3 +103,64 @@ O **On** é usado na relação entre tabelas e indica a coluna que faz referenci
 ```sql
 select movies.name, movies.id, Rating.rate from movies join Rating on movies.id = Rating.movie_id
 ```
+
+## Exercicio 4
+
+**a)**
+
+```sql
+SELECT movies.id, movies.name, Rating.rate, Rating.comment FROM movies LEFT JOIN Rating ON movies.id = Rating.movie_id;
+```
+
+**b)**
+
+```sql
+select movies.id, movies.name, MovieCast.actor_id from movies right join MovieCast on MovieCast.movie_id = movies.id
+```
+
+**c)**
+
+```sql
+select movies.name, avg(Rating.rate) from movies left join Rating on Rating.movie_id = movies.id group by movies.name
+```
+
+## Exercicio 5
+
+**a)**
+
+```sql
+SELECT * FROM Movie m
+LEFT JOIN MovieCast mc ON m.id = mc.movie_id
+JOIN Actor a ON a.id = mc.actor_id;
+```
+
+Pois as tabelas movies e actor não tem relação entre elas, mas ambas tem relação com a tabela MovieCast então primeiro ele relaciona movies com MovieCast e depois relaciona Actor com MovieCast.
+
+**b)**
+
+```sql
+select movies.id as movies_id, movies.name as movies_name, Actor.id as actor_id, Actor.name as actor_name from movies
+join MovieCast on movies.id = MovieCast.movie_id
+join Actor on Actor.id = MovieCast.Actor_id
+```
+
+**c)**
+
+```sql
+SELECT m.id as movie_id, m,title, a.id as actor_id, a.name FROM Movie m
+LEFT JOIN MovieCast mc ON m.id = mc.movie_id
+JOIN Actor a ON a.id = mc.actor_id;
+```
+
+Error Code: 1054. Unknown column 'm' in 'field list'
+
+Como tem uma virgula depois do m, ele interpretou como se fosse uma das colunas e não existe nenhuma coluna com o nome "m".
+
+**d)**
+
+```sql
+select movies.name as movie, Actor.name as actor, Rating.comment as comment, Rating.rate as rate from movies
+join MovieCast on movies.id = MovieCast.movie_id
+join Actor on Actor.id = MovieCast.actor_id
+join Rating on movies.id = Rating.movie_id
+```
