@@ -2,7 +2,7 @@
 
 ## Exercicio 1
 
-**a)** Chave estrangeira é um identificador que vem de outra tabela com a qual ela se relaciona.
+**a)** Chave estrangeira é um identificador que vem de outra tabela com a qual ela se relaciona
 
 **b)**
 
