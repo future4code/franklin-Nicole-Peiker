@@ -13,7 +13,7 @@ export const getUserById = async (req: Request, res: Response): Promise<any>=> {
       throw new Error("Usuário não encontrado")
     }
     res.status(200).send(result)
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
     res.status(errorStatus).send(error.message)
   }
