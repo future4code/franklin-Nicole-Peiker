@@ -84,6 +84,5 @@ class Bank {
     this.accounts.push(newAccount)
   }
   public removeAccount(account: UserAccount): void {
-    
   }
 }
