@@ -1,7 +1,7 @@
 // export class Client{
-//   private name: string;
-//   private registrationNumber: number;
-//   private consumedEnergy: number;
+//   public name: string;
+//   public registrationNumber: number;
+//   public consumedEnergy: number;
 
 //   constructor(name: string, registrationNumber: number, consumedEnergy: number){
 //     this.name = name;

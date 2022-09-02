@@ -76,3 +76,13 @@ console.log(industry.getMachinesQuantity())
 console.log(commerce.getFloorsQuantity())
 
 //Exercício 4
+//a) Essa classe possui as propriedades cpf, name, registrationNumber, consumedEnergy, cpf e residentsQuantity, sendo as duas ultimas herdadas de Residence. Como metodos possui, getCpf e calculateBill fora o metodo getResidentsQuantity herdado também da classe pai. 
+
+//Exercício 5
+//a) Como em ambas foi implementado Client, ela tem 3 propriedades em comum
+//b) Os documentos (cpf e cnpj), residentsQuantity e floorsQuantity
+
+//Exercício 6
+//a) Deve ser filha de industrial pois precisa das propriedades dela (quantidade de máquinas e cep).
+//b) Assim como as outras implementa Client que também possui informações necessarias para o calculo da conta de luz. 
+//c) Pois as propriedades privadas podem ser lidas mas não devem ser modificadas. 
