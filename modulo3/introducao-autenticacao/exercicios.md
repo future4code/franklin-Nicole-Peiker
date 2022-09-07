@@ -5,18 +5,14 @@ a) Acho que o uso de string aumentam as possibilidades de uso. Podemos adicionar
 b)
 
 ```ts
-import { v4 } from 'uuid';
-
-export class IdGenerator {
-  public generateId = () => {
-    return v4();
-  };
-}
+export const generateId = () => {
+  return v4();
+};
 ```
 
 ###Exercício 2
 
-a)
+a) Primeiro é criado uma variavel com o nome da tabela que no caso é user. Depois é feita a conexão com o banco de dados. Depois é feito uma função que recebe um id, email e password e cria um novo usuário na tabela User.
 
 b)
 
@@ -29,6 +25,19 @@ CREATE TABLE User (
 ```
 
 c)
+
+```ts
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { id, email, password } = req.body;
+    await connection('User').insert({ id, email, password }).into('User');
+
+    res.status(200).send('Usuário criado com sucesso');
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+};
+```
 
 ###Exercício 3
 a) Converte para uma string caso não seja.
@@ -49,9 +58,82 @@ export default class Authenticator {
     return tokenData;
   };
 }
+export type authenticationData = {
+  id: string;
+};
 ```
 
 ###Exercício 4
+a)
+
+```ts
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new Error('Email ou senha incorreto.');
+    }
+    const id = generateId();
+    await connection('User').insert({ id, email, password }).into('User');
+
+    const token = generateToken(id);
+    res.status(200).send(token);
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+};
+```
+
+b)
+
+```ts
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new Error('Email ou senha incorreto.');
+    } else if (email.includes('@') === false) {
+      throw new Error('O email esta incorreto.');
+    } else {
+      const id = generateId();
+      await connection('User').insert({ id, email, password }).into('User');
+
+      const token = generateToken(id);
+      res.status(200).send(token);
+    }
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+};
+```
+
+c)
+
+```ts
+export const createUser = async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      throw new Error('Email ou senha incorreto.');
+    } else if (email.includes('@') === false) {
+      throw new Error('O email esta incorreto.');
+    } else if (password.length < 6) {
+      throw new Error('Sua senha deve possuir no mínimo 6 caracteres.');
+    } else {
+      const id = generateId();
+      await connection('User').insert({ id, email, password }).into('User');
+
+      const token = generateToken(id);
+      res.status(200).send(token);
+    }
+  } catch (error: any) {
+    res.status(500).send(error.message);
+  }
+};
+```
 
 ###Exercício 5
 
