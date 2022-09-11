@@ -9,6 +9,8 @@ a) Primeiro atualizamos o cadastro para inserir no banco de dados o hash e compa
 
 ## Exercicio 3
 
+a) O cadastro para que ao criar um usuário seja salvo no banco de dados um hash que será usado depois no login.
+
 d) Não. Pois para acessar esse endpoint não é necessario a senha, somente o token.
 
 ## Exercicio 4

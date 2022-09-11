@@ -22,7 +22,7 @@ export default async function login(req: Request, res: Response) {
         }
 
         const authenticator = new Authenticator()
-        const token = authenticator.generateToken({id: user.id})
+        const token = authenticator.generateToken({id: user.id, role: user.role})
         res.send({token})
 
     } catch (error: any) {
