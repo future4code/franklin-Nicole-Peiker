@@ -43,6 +43,7 @@ export default async function createUser(
       res.status(201).send({ newUser: {id, name, nickname, email}, token })
 
    } catch (error: any) {
+      //quando tem um erro não tratado, ele entra no catch, mas sem um status code, por isso é feito o if abaixo
       if (res.statusCode === 200) {
          res.status(500).send({ message: "Internal server error" })
       } else {
