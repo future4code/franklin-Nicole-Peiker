@@ -4,6 +4,7 @@ export type user = {
   password: string
   name: string
   nickname: string
+  role: string
 }
 export type AuthenticatorData = {
    id: string;

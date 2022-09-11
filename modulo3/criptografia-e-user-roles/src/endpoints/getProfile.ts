@@ -9,7 +9,7 @@ export default async function getProfile(req: Request, res: Response){
             throw new Error("Token não enviado")
         }
         const authenticator = new Authenticator()
-        const data = authenticator.getData(token)
+        const data = authenticator.getTokenData(token)
         
         const userDB = new UserDatabase()
         const user = await userDB.getById(data.id)

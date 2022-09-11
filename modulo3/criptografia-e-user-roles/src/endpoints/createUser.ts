@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { UserDatabase } from "../data/UserDatabase";
 import { Authenticator } from "../services/Authenticator";
-import { HashMenager } from "../services/HashMenager";
-import { IdGenerator } from "../services/idGenerator";
+import { HashManager } from "../services/HashManager";
+import { IdGenerator } from "../services/IdGenerator";
 import { user } from "../types";
 
 export default async function createUser(
@@ -29,8 +29,8 @@ export default async function createUser(
       const idGenerator = new IdGenerator()
       const id= idGenerator.generateId()
 
-      const hashGenerator = new HashMenager()
-      const hash = hashGenerator.generateHash(password)
+      const hashGenerator = new HashManager()
+      const hash = await hashGenerator.generateHash(password)
 
       const newUser: user = { id, name, nickname, email, password: hash
        }
