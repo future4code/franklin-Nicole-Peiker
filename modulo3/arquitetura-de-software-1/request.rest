@@ -1,0 +1,11 @@
+# @name signup
+
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+   "name": "Norman Osbourne", 
+   "email": "3@oscorp.com" ,
+   "password": "ihatepeter"
+}
+###
