@@ -4,8 +4,26 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-   "name": "Norman Osbourne", 
-   "email": "3@oscorp.com" ,
-   "password": "ihatepeter"
+   "name": "Rafael Park", 
+   "email": "rafael@teste.com" ,
+   "password": "parK@120589",
+   "role": "ADMIN"
 }
 ###
+
+# @name Login
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+   "email": "rafael@teste.com" ,
+   "password": "parK@120589",
+}
+
+###
+
+# @name GetAllUsers
+
+GET http://localhost:3003/users/all
+Content-Type: application/json

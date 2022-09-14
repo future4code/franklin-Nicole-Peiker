@@ -11,10 +11,56 @@ export class UserController {
 
       res.status(201).send(response)  
     } catch (error: unknown) {
-      if(error instanceof Error && res.statusCode !== 200) {
-        res.send({message: error.message})
+      if (error instanceof Error) {
+          res.status(400).send({ message: error.message })
       }
-      res.status(500).send('Unexpected server error')
+
+      res.status(500).send({ message: "Erro inesperado"})
+    }
+  }
+  public login = async (req:Request, res: Response): Promise<void> => {
+    try {
+      const { email, password } = req.body
+
+      const userBusiness = new UserBusiness()
+      const response = await userBusiness.login(email, password)
+
+      res.status(200).send(response)
+    } catch (error: unknown) {
+      if(error instanceof Error) {
+        res.status(400).send({ message: error.message})
+      }   
+      res.status(500).send({ message: "Erro inesperado"})   
+    }
+  }
+  public getAllUsers = async (req: Request, res: Response): Promise<void> => {
+    try {
+
+      const userBusiness = new UserBusiness()
+      const response = await userBusiness.showAllUsers()
+
+      res.status(200).send(response)      
+    }catch (error: unknown) {
+      if(error instanceof Error) {
+        res.status(400).send({ message: error.message})
+      }   
+      res.status(500).send({ message: "Erro inesperado"})   
+    }
+  }
+  public deleteUser = async (req: Request, res: Response): Promise<void> => {
+    try {
+      const id = req.params.id;
+      const token = req.params.token;
+
+      const userBusiness = new UserBusiness()
+      const response = await userBusiness.deleteUser(token, id)
+
+      res.status(200).send("Usuário apagado com sucesso")
+    } catch (error: unknown) {
+      if(error instanceof Error) {
+        res.status(400).send({ message: error.message})
+      }   
+      res.status(500).send({ message: "Erro inesperado"})   
     }
   }
 }
