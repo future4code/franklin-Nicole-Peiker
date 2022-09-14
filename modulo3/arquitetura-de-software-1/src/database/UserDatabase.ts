@@ -35,13 +35,6 @@ export default class UserDatabase extends BaseDatabase {
 
         return result
     }
-    public getById = async (id: string): Promise<User> => {
-        const [result] = await BaseDatabase.connection(UserDatabase.TABLE_USERS)
-        .select()
-        .where({id})
-
-        return result
-    }
 
     public delete = async (id: string): Promise<number> => {
         const affectRows = await BaseDatabase.connection(UserDatabase.TABLE_USERS)

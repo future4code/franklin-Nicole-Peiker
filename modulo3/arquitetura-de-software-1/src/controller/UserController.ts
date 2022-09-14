@@ -50,7 +50,7 @@ export class UserController {
   public deleteUser = async (req: Request, res: Response): Promise<void> => {
     try {
       const id = req.params.id;
-      const token = req.params.token;
+      const token = req.headers.authorization as string;
 
       const userBusiness = new UserBusiness()
       const response = await userBusiness.deleteUser(token, id)

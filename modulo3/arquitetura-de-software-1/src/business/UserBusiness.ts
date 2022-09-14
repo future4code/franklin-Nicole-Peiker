@@ -101,7 +101,7 @@ export default class UserBusiness {
 
         return users
     }
-    public deleteUser = async (token: string, id:string) :Promise<any> => {
+    public deleteUser = async (token: string, id:string) :Promise<number> => {
 
         if(!token){
             throw new Error('É necessario estar logado para efetuar essa alteração')
@@ -110,16 +110,18 @@ export default class UserBusiness {
         const authenticator = new Authenticator()
         const data = authenticator.getTokenPayload(token)
 
-        const userDatabase = new UserDatabase()
-        const user = await userDatabase.getById(id)
-
-        if(!user){
-            throw new Error('Problemas na identificação do usuário logado. Efetue seu login e tente outra vez.')
+        if(data.role !== 'ADMIN') {
+            throw new Error('Somente usuários ADMIN podem fazer essa alteração.')
         }
 
+        const userDatabase = new UserDatabase()
         const response = await userDatabase.delete(id)
 
-   
+        if(response === 0) {
+            throw new Error('Usuário não encontrado')
+        }
+
+        return response
     }
 
 }
