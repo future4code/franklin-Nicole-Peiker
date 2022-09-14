@@ -1,0 +1,26 @@
+# @name teste
+
+GET http://localhost:3003/
+Content-Type: application/json
+
+###
+# @name createUser
+
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "email": "marcos@dev.com",
+    "password": "marcos1234"
+}
+
+###
+# @name login
+
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "marcos@dev.com",
+    "password": "marcos1234"
+}
