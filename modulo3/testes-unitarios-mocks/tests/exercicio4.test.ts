@@ -2,7 +2,7 @@ import { performAttack } from '../src/performAttack';
 import { Character } from '../src/validateCharacter';
 
 describe('Testing function performAttack', () => {
-  test('', () => {
+  test('Should recieve two characters with all valid parameters where the defender lost 200 points.', () => {
     const validator = jest.fn((character: Character) => true);
     const attacker: Character = {
       name: 'Charmander',
@@ -20,8 +20,8 @@ describe('Testing function performAttack', () => {
     expect(defender.life).toBe(1300);
   });
 
-  test('', () => {
-    expect.assertions(3);
+  test('One of the players should have no name and the fuction pass with a error message.', () => {
+    expect.assertions(4);
     const validator = jest.fn((character: Character) => false);
     try {
       const attacker: Character = {
@@ -41,7 +41,8 @@ describe('Testing function performAttack', () => {
       if (error instanceof Error) {
         expect(error.message).toBe('Invalid Character');
         expect(validator).toHaveBeenCalled();
-        expect(validator).toHaveBeenCalledTimes(2);
+        expect(validator).toHaveBeenCalledTimes(1);
+        expect(validator).toHaveReturnedTimes(1);
       }
     }
   });
