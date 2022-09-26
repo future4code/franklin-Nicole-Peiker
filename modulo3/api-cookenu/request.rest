@@ -1,12 +1,32 @@
 # @name signup
-
 POST http://localhost:3003/signup
 Content-Type: application/json
 
 {
-   "name": "Norman Osbourne", 
-   "email": "norman@oscorp.com" ,
-   "password": "ihatepeter"
+    "name": "Leia",
+    "email": "leia@dev.com",
+    "password": "abc1234"
 }
 
 ###
+
+# @name login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "leia@dev.com",
+    "password": "abc1234"
+}
+
+###
+
+# @name getMyProfile
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjgwNDIyOTRjLWVjYWItNDk5ZS05ODc3LTFiZGVmNDM2MjZhNiIsImlhdCI6MTY2NDIwNDUxMiwiZXhwIjoxNjY0MjkwOTEyfQ.xP3H9zbPnTUqHVaZ092YKTSIwvN2SOV5dyvoJnUT6VU"
+
+###
+
+
+

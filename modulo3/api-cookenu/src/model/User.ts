@@ -40,3 +40,14 @@ export interface ITokenOutputDTO {
   message: string;
   token: string;
 }
+
+export interface ILoginInputDTO {
+  email: string;
+  password: string;
+}
+
+export interface IProfileOutputDTO {
+  id: string;
+  name: string;
+  email: string;
+}

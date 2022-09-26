@@ -16,4 +16,4 @@ const authenticationController = new AuthenticationController(
 );
 
 authenticationRouter.post('/signup', authenticationController.signup);
-// authenticationRouter.post("/login", authenticationController.login)
+authenticationRouter.post('/login', authenticationController.login);

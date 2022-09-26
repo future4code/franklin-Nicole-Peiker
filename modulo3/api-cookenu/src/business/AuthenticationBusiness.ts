@@ -1,5 +1,11 @@
 import { UserDatabase } from '../database/UserDatabase';
-import { ISignupInputDTO, ITokenOutputDTO, User } from '../model/User';
+import {
+  ILoginInputDTO,
+  ISignupInputDTO,
+  ITokenOutputDTO,
+  IUserDB,
+  User
+} from '../model/User';
 import { Authenticator, ITokenPayload } from '../services/Authenticator';
 import { HashManager } from '../services/HashManager';
 import { IdGenerator } from '../services/IdGenerator';
@@ -58,8 +64,39 @@ export class AuthenticationBusiness {
     const token = this.authenticator.generateToken(payload);
 
     const response: ITokenOutputDTO = {
-      token,
-      message: 'Cadastro realizado com sucesso'
+      message: 'Cadastro realizado com sucesso',
+      token
+    };
+
+    return response;
+  };
+  public login = async (input: ILoginInputDTO) => {
+    const { email, password } = input;
+
+    if (!email || !password) {
+      throw new Error('Por favor informe seu email e senha');
+    }
+
+    const userDB = await this.userDatabase.findByEmail(email);
+
+    if (!userDB) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    const verifyPassword = await this.hashManager.compare(
+      password,
+      userDB.password
+    );
+
+    if (!verifyPassword) {
+      throw new Error('Usuário ou senha inválido.');
+    }
+
+    const payload = { id: userDB.id };
+    const token = await this.authenticator.generateToken(payload);
+    const response: ITokenOutputDTO = {
+      message: 'Login efetuado com sucesso',
+      token
     };
 
     return response;
