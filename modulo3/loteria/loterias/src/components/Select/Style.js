@@ -9,7 +9,7 @@ export const BoxContainer = styled.div`
 
   @media (max-width: 940px) and (orientation: portrait) {
     min-height: 0;
-    min-width: 0;
+    min-width: 420px;
   }
 `;
 
@@ -68,6 +68,7 @@ export const Title = styled.div`
   display: flex;
   align-items: center;
   gap: 1.44rem;
+  white-space: nowrap;
 
   @media (max-width: 940px) and (orientation: portrait) {
     flex-direction: column;
@@ -78,6 +79,9 @@ export const Title = styled.div`
 export const RaffleTxt = styled.div`
   @media (max-width: 940px) and (orientation: portrait) {
     text-align: center;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
   }
 `;
 
@@ -86,9 +90,25 @@ export const Raffle = styled.p`
   font-weight: 500;
 `;
 
+export const RaffleInfo = styled.div`
+  display: flex;
+`;
+
 export const RaffleNumber = styled.p`
   font-size: 1.25rem;
   font-weight: 700;
+  @media (max-width: 940px) and (orientation: portrait) {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+`;
+
+export const RaffleDate = styled.p`
+  font-size: 1.25rem;
+  font-weight: 700;
+  @media (max-width: 940px) and (orientation: portrait) {
+    display: none;
+  }
 `;
 
 export const TitleText = styled.h1`
@@ -96,7 +116,7 @@ export const TitleText = styled.h1`
   font-weight: 700;
 `;
 
-export const RightContainer = styled.h1`
+export const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -108,7 +128,7 @@ export const RightContainer = styled.h1`
     align-items: center;
     justify-content: space-between;
     padding: 3rem 0 0 0;
-    height: 60vh;
+    gap: 4rem;
   }
 `;
 
@@ -124,9 +144,9 @@ export const RaffleBox = styled.div`
   padding: 7rem;
 
   @media (max-width: 940px) and (orientation: portrait) {
-    padding: 0;
+    padding: 3rem 0;
     width: 90%;
-    height: 80%;
+    height: 40%;
     margin: 0;
   }
 `;
@@ -156,5 +176,6 @@ export const Bottom = styled.p`
     bottom: 2rem;
     width: 60%;
     text-align: center;
+    font-size: 0.875rem;
   }
 `;

@@ -9,6 +9,8 @@ import {
   Raffle,
   RaffleBall,
   RaffleBox,
+  RaffleDate,
+  RaffleInfo,
   RaffleNumber,
   RaffleTxt,
   RightContainer,
@@ -90,9 +92,10 @@ const Select = () => {
           <RaffleTxt>
             <Raffle>CONCURSO</Raffle>
             {idRaffle.length > 0 && raffle.length > 0 && dateRaffle.length > 0 && (
-              <RaffleNumber>
-                {idRaffle} - {corretedDate}
-              </RaffleNumber>
+              <RaffleInfo>
+                <RaffleNumber> {idRaffle} </RaffleNumber>
+                <RaffleDate> - {corretedDate} </RaffleDate>
+              </RaffleInfo>
             )}
           </RaffleTxt>
         </BoxAside>
