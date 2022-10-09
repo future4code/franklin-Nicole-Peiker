@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { useState } from 'react';
 import { BASE_URL } from '../constants/urls';
 
-export const getLoterias = () => {
+export const getLotteries = () => {
   axios
     .get(`${BASE_URL}/loterias`)
     .then(res => {
@@ -12,7 +13,7 @@ export const getLoterias = () => {
     });
 };
 
-export const getLoteriasConcursos = () => {
+export const getLotteriesDraws = () => {
   axios
     .get(`${BASE_URL}/loterias-concursos`)
     .then(res => {
@@ -23,7 +24,7 @@ export const getLoteriasConcursos = () => {
     });
 };
 
-export const getConcursos = id => {
+export const getLotteryDraw = id => {
   axios
     .get(`${BASE_URL}/concursos/${id}`)
     .then(res => {

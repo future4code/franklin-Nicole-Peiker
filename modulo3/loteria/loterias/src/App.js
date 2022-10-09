@@ -1,10 +1,10 @@
 import React from 'react';
-import Router from './routes/Router';
+import Select from './components/Select/Select';
 
 const App = () => {
   return (
     <div>
-      <Router />
+      <Select />
     </div>
   );
 };

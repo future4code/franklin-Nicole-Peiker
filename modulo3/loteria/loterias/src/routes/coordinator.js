@@ -1,22 +1,21 @@
 export const goToMegaSena = navigate => {
   navigate('/');
 };
-export const goToLastPage = navigate => {
-  navigate(-1);
-};
-export const goToDiaDeSorte = navigate => {
-  navigate('/diadesorte');
+export const goToQuina = (navigate, id) => {
+  navigate('/1');
 };
 export const goToLotoFacil = navigate => {
-  navigate('/lotofacil');
+  navigate('/2');
 };
 export const goToLotoMania = navigate => {
-  navigate('/lotomania');
+  navigate('/3');
 };
-export const goToQuina = (navigate, id) => {
-  navigate('/quina');
-};
-
 export const goToTimeMania = (navigate, id) => {
-  navigate('/timemania');
+  navigate('/4');
+};
+export const goToDiaDeSorte = navigate => {
+  navigate('/5');
+};
+export const goToLastPage = navigate => {
+  navigate(-1);
 };
