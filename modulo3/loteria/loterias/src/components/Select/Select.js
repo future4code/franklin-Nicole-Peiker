@@ -30,7 +30,7 @@ const Select = () => {
   const [dateRaffle, setDateRaffle] = useState('');
   const getDate = dateRaffle.split('T')[0];
   const dateArr = getDate.split('-');
-  const corretedDate = dateArr.reverse().join('-');
+  const corretedDate = dateArr.reverse().join('/');
 
   const getLotteries = () => {
     axios

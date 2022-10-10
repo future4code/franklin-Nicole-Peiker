@@ -5,31 +5,23 @@ export const Background = styled.svg`
   top: 0;
   left: 0;
   height: 100vh;
-  min-height: 800px;
+  min-height: 1000px;
   z-index: 0;
 
-  @media (max-width: 940px) and (orientation: portrait) {
+  @media (max-width: 1024px) and (orientation: portrait) {
     transform: rotate(90deg);
-    top: -250px;
-    width: 100%;
+    top: -380px;
+    width: 100vw;
+    min-height: 1250px;
+  }
+
+  @media (max-width: 768px) and (orientation: portrait) {
+    top: -440px;
+    min-height: 1350px;
+  }
+
+  @media (max-width: 480px) and (orientation: portrait) {
+    top: -450px;
+    min-height: 1200px;
   }
 `;
-
-// export const Rect = styled.div`
-//   position: relative;
-//   background: green;
-//   width: 613px;
-//   height: 1080px;
-//   overflow: hidden;
-// `;
-
-// export const Circle = styled.div`
-//   position: absolute;
-//   background: #efefef;
-//   background: grey;
-//   width: 2100px;
-//   height: 2100px;
-//   right: -1950px;
-//   top: -510px;
-//   border-radius: 50%;
-// `;

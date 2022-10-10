@@ -3,7 +3,6 @@ import { Background, Circle, Rect } from './style';
 
 const AsideBackground = props => {
   return (
-    // <Rect background={props.color}>
     <Background
       viewBox="0 0 613 1080"
       fill="none"
@@ -14,9 +13,6 @@ const AsideBackground = props => {
         fill={props.color}
       />
     </Background>
-
-    //   <Circle></Circle>
-    // </Rect>
   );
 };
 
