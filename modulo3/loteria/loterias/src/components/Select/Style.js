@@ -136,7 +136,6 @@ export const RightContainer = styled.div`
   align-items: center;
 
   @media (max-width: 1024px) and (orientation: portrait) {
-    align-items: center;
     justify-content: space-between;
     padding: 3rem 0 0 0;
     gap: 4rem;
@@ -148,7 +147,7 @@ export const RaffleBox = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: 80%;
   height: 70%;
   gap: 2rem;
   margin: auto;
@@ -182,6 +181,8 @@ export const RaffleBall = styled.div`
 export const Bottom = styled.p`
   position: relative;
   bottom: 6rem;
+  width: 80%;
+  text-align: center;
   @media (max-width: 1024px) and (orientation: portrait) {
     bottom: 2rem;
     width: 60%;
