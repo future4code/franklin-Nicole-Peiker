@@ -13,8 +13,8 @@ export default class CompetitionController {
     try {
       const input: IModalityInputDTO = { modality: req.body.modality };
 
-      const response = await this.competitionBusiness.createCompetition(input);
-      res.status(201).send(response);
+      await this.competitionBusiness.createCompetition(input);
+      res.status(201).send('Competição criada com sucesso');
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -32,10 +32,8 @@ export default class CompetitionController {
         value: Number(req.body.value)
       };
 
-      const response = await this.competitionBusiness.insertResultCompetition(
-        input
-      );
-      res.status(201).send(response);
+      await this.competitionBusiness.insertResultCompetition(input);
+      res.status(201).send('Resultado iserido com sucesso');
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);

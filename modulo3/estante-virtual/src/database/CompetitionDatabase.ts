@@ -4,6 +4,7 @@ import {
   IIdDTO,
   IInsertResultDB,
   IInsertResultInputDTO,
+  IResultOutputDB,
   Result,
   STATUS
 } from '../model/Competition';
@@ -36,16 +37,18 @@ export class CompetitionDatabase extends BaseDatabase {
     return resultDB;
   };
 
-  public createCompetition = async (competition: Competition) => {
+  public createCompetition = async (
+    competition: Competition
+  ): Promise<void> => {
     const competitionDB = this.toCompetitionModelDB(competition);
 
-    await this.getConnection()(CompetitionDatabase.TABLE_COMPETITIONS).insert(
-      competitionDB
-    );
+    await BaseDatabase.connection(
+      CompetitionDatabase.TABLE_COMPETITIONS
+    ).insert(competitionDB);
   };
 
-  public getCompetitionById = async (id: string) => {
-    const [result] = await this.getConnection()(
+  public getCompetitionById = async (id: string): Promise<ICompetitionDB> => {
+    const [result] = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_COMPETITIONS
     )
       .select()
@@ -56,8 +59,8 @@ export class CompetitionDatabase extends BaseDatabase {
     return result;
   };
 
-  public getUserById = async (userId: string) => {
-    const [result] = await this.getConnection()(
+  public getUserById = async (userId: string): Promise<IInsertResultDB> => {
+    const [result] = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_RESULTS
     )
       .select()
@@ -68,16 +71,20 @@ export class CompetitionDatabase extends BaseDatabase {
     return result;
   };
 
-  public insertResultCompetition = async (newResult: Result) => {
+  public insertResultCompetition = async (newResult: Result): Promise<void> => {
     const resultDB = this.toResultModelDB(newResult);
     console.log(resultDB);
-    await this.getConnection()(CompetitionDatabase.TABLE_RESULTS).insert(
+    await BaseDatabase.connection(CompetitionDatabase.TABLE_RESULTS).insert(
       resultDB
     );
   };
 
-  public insertTry = async (userId: string, value: number, tries: number) => {
-    const affectedRows = await this.getConnection()(
+  public insertTry = async (
+    userId: string,
+    value: number,
+    tries: number
+  ): Promise<void> => {
+    const affectedRows = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_RESULTS
     )
       .update({ value, tries })
@@ -85,7 +92,7 @@ export class CompetitionDatabase extends BaseDatabase {
     console.log(affectedRows);
   };
   public endCompetition = async (status: STATUS, competitionId: string) => {
-    const affectedRows = await this.getConnection()(
+    const affectedRows = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_COMPETITIONS
     )
       .update({ status })
@@ -93,7 +100,7 @@ export class CompetitionDatabase extends BaseDatabase {
     console.log(affectedRows);
   };
   public getRanking = async (competitionId: string) => {
-    const result = await this.getConnection()(
+    const result = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_COMPETITIONS
     )
       .select([
@@ -114,6 +121,7 @@ export class CompetitionDatabase extends BaseDatabase {
       .orderBy('value', 'desc');
 
     console.log(result);
+
     return result;
   };
 }

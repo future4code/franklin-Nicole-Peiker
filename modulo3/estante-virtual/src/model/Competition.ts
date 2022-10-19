@@ -40,7 +40,7 @@ export interface IRankingOutputDTO {
 export interface ICompetitionDB {
   id: string;
   modality: MODALITY;
-  status: string;
+  status: STATUS;
 }
 
 export interface IInsertResultDB {
@@ -49,6 +49,13 @@ export interface IInsertResultDB {
   name: string;
   value: number;
   tries: number;
+}
+
+export interface IResultOutputDB {
+  name: string;
+  value: number;
+  tries: number;
+  status: STATUS;
 }
 
 export class Competition {

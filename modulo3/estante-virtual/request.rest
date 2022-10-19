@@ -1,5 +1,4 @@
 # @name createCompetition
-
 POST http://localhost:3003/competition
 Content-Type: application/json
 
@@ -10,7 +9,6 @@ Content-Type: application/json
 ###
 
 # @name insertResultCompetition
-
 POST http://localhost:3003/competition/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
 Content-Type: application/json
 
@@ -22,7 +20,6 @@ Content-Type: application/json
 ###
 
 # @name insertTry
-
 PUT http://localhost:3003/competition/d20bf3db-1f1b-4273-8bbf-e97dd2db59c3
 Content-Type: application/json
 
@@ -35,7 +32,6 @@ PUT http://localhost:3003/competition/end/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
 Content-Type: application/json
 
 ###
-
 GET http://localhost:3003/ranking/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
 Content-Type: application/json
 

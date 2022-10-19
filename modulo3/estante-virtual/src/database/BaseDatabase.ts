@@ -15,7 +15,4 @@ export class BaseDatabase {
       multipleStatements: true
     }
   });
-  protected getConnection() {
-    return BaseDatabase.connection;
-  }
 }
