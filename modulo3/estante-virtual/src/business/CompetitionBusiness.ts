@@ -29,13 +29,14 @@ export default class CompetitionBusiness {
     const competition = new Competition(id, modality, status);
     await this.competitionDatabase.createCompetition(competition);
 
-    return id;
+    return { id: id };
   };
 
   public insertResultCompetition = async (input: IInsertResultInputDTO) => {
     const competitionId = input.competitionId;
     const name = input.name;
     const value = input.value;
+    console.log(value);
     const tries = 1;
 
     if (!competitionId || !name || !value) {
@@ -120,6 +121,9 @@ export default class CompetitionBusiness {
     }
 
     await this.competitionDatabase.insertTry(userId, value, tries);
+
+    const message = 'Resultado atualizado com sucesso';
+    return message;
   };
 
   public endCompetition = async (competitionId: string) => {
@@ -135,14 +139,17 @@ export default class CompetitionBusiness {
     }
 
     if (verifyId.status === 'CLOSE') {
-      throw new Error('Competição fechada');
+      throw new Error('Esta competição já esta fechada');
     }
     const status = STATUS.CLOSE;
 
     await this.competitionDatabase.endCompetition(status, competitionId);
+
+    return status;
   };
 
   public getRanking = async (competitionId: string) => {
+    let order = 'desc';
     if (!competitionId) {
       throw new Error('Por favor informe o ID da competição');
     }
@@ -154,7 +161,14 @@ export default class CompetitionBusiness {
       throw new Error('Competição não encontrada');
     }
 
-    const result = await this.competitionDatabase.getRanking(competitionId);
+    if (verifyId.modality === 'ONE_HUNDRED_METERS') {
+      order = 'asc';
+    }
+
+    const result = await this.competitionDatabase.getRanking(
+      competitionId,
+      order
+    );
 
     if (result.length === 0) {
       throw new Error('Nenhum atleta cadastrado na competition');

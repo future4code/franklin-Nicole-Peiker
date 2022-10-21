@@ -59,9 +59,9 @@ export class CompetitionDBMock {
     return result;
   };
 
-  public insertResultCompetition = async (
-    newResult: Result
-  ): Promise<void> => {};
+  public insertResultCompetition = async (newResult: Result): Promise<void> => {
+    //retornar msg de sucesso
+  };
 
   public insertTry = async (
     userId: string,

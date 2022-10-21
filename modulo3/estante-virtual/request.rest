@@ -24,15 +24,17 @@ PUT http://localhost:3003/competition/d20bf3db-1f1b-4273-8bbf-e97dd2db59c3
 Content-Type: application/json
 
 {
-    "value": 75.58
+    "value": 76.58
 }
 
+# @name endCompetition
 ###
 PUT http://localhost:3003/competition/end/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
 Content-Type: application/json
 
+# @name getRannking
 ###
-GET http://localhost:3003/ranking/bb9b7ee8-ae4b-4bd1-9bd6-e7e21594399b
+GET http://localhost:3003/ranking/f03017bb-2c08-4cdc-bb63-7fbd7cebe01f
 Content-Type: application/json
 
 ###

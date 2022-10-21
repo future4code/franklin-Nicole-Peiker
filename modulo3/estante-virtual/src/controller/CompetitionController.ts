@@ -33,7 +33,7 @@ export default class CompetitionController {
       };
 
       await this.competitionBusiness.insertResultCompetition(input);
-      res.status(201).send('Resultado iserido com sucesso');
+      res.status(201).send('Resultado inserido com sucesso');
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);
@@ -47,11 +47,11 @@ export default class CompetitionController {
     try {
       const input: IInsertTryInputDTO = {
         userId: req.params.userId,
-        value: Number(req.body.value)
+        value: req.body.value
       };
 
-      await this.competitionBusiness.insertTry(input);
-      res.status(200).send('Tentativa registrada com sucesso');
+      const result = await this.competitionBusiness.insertTry(input);
+      res.status(200).send(result);
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(error.message);

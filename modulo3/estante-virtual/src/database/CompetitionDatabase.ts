@@ -99,7 +99,7 @@ export class CompetitionDatabase extends BaseDatabase {
       .where({ id: competitionId });
     console.log(affectedRows);
   };
-  public getRanking = async (competitionId: string) => {
+  public getRanking = async (competitionId: string, order: string) => {
     const result = await BaseDatabase.connection(
       CompetitionDatabase.TABLE_COMPETITIONS
     )
@@ -118,7 +118,7 @@ export class CompetitionDatabase extends BaseDatabase {
       .whereRaw(
         `${CompetitionDatabase.TABLE_COMPETITIONS}.id = "${competitionId}"`
       )
-      .orderBy('value', 'desc');
+      .orderBy('value', order);
 
     console.log(result);
 
