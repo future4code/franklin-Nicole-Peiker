@@ -19,6 +19,9 @@ export interface IInsertTryInputDTO {
   value: number;
 }
 
+export interface IUserIdDTO {
+  userId: string;
+}
 export interface IModalityInputDTO {
   modality: MODALITY;
 }

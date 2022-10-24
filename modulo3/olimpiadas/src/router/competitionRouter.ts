@@ -14,6 +14,10 @@ competitionRouter.post(
   '/competition/:id',
   competitionController.insertResultCompetition
 );
+competitionRouter.get(
+  '/competition/:userId',
+  competitionController.getResultByUserId
+);
 competitionRouter.put('/competition/:userId', competitionController.insertTry);
 competitionRouter.put(
   '/competition/end/:id',

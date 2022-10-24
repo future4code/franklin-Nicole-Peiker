@@ -3,7 +3,8 @@ import CompetitionBusiness from '../business/CompetitionBusiness';
 import {
   IInsertResultInputDTO,
   IInsertTryInputDTO,
-  IModalityInputDTO
+  IModalityInputDTO,
+  IUserIdDTO
 } from '../model/Competition';
 
 export default class CompetitionController {
@@ -60,6 +61,24 @@ export default class CompetitionController {
       res.status(500).send({ message: 'Erro inesperado' });
     }
   };
+
+  public getResultByUserId = async (req: Request, res: Response) => {
+    try {
+      const input: IUserIdDTO = {
+        userId: req.params.userId
+      };
+
+      const result = await this.competitionBusiness.getResultByUserId(input);
+      res.status(200).send(result);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(error.message);
+        return res.status(400).send({ message: error.message });
+      }
+      res.status(500).send({ message: 'Erro inesperado' });
+    }
+  };
+
   public endCompetition = async (req: Request, res: Response) => {
     try {
       const competitionId = req.params.id;

@@ -5,6 +5,7 @@ import {
   IInsertResultInputDTO,
   IInsertTryInputDTO,
   IModalityInputDTO,
+  IUserIdDTO,
   MODALITY,
   Result,
   STATUS
@@ -124,6 +125,22 @@ export default class CompetitionBusiness {
 
     const message = 'Resultado atualizado com sucesso';
     return message;
+  };
+
+  public getResultByUserId = async (input: IUserIdDTO) => {
+    const userId = input.userId;
+
+    if (!userId) {
+      throw new Error('Por favor informe o usuário');
+    }
+
+    const result = await this.competitionDatabase.getUserById(userId);
+
+    if (!result) {
+      throw new Error('Usuário não encontrado');
+    }
+
+    return result;
   };
 
   public endCompetition = async (competitionId: string) => {
